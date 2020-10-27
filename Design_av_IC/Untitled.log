@@ -1,0 +1,60 @@
+
+                 *********************************************
+                 *                                           *
+                 *             A I M - S p i c e             *
+                 *                                           *
+                 *         Professional Version 2018.100           *
+                 *                                           *
+                 *********************************************
+
+	Date: Tue Aug 28 14:50:00 2018
+	Circuit File: C:\Users\Bruker\Documents\Design av IC\Untitled.cir
+	Analysis: DC Operating Point
+
+**************************  Circuit Description  **************************
+
+     1:  example
+     2:  vdd 1 0 dc 2v
+     3:  r1 1 2 5k
+     4:  r2 2 0 10k
+     5:  .op
+
+***************************  Model Parameters  ****************************
+
+
+***************  Device Parameters (Only for .op analysis)  ***************
+
+Device r2:
+	Instance operating temperature [oC]  :27
+	R (resistance)                 [Ohm] : 10000
+	V (resistor voltage)           [V]   : 1.33333
+	I (resistor current)           [A]   : 0.000133333
+	P (resistor power)             [W]   : 0.000177778
+
+Device r1:
+	Instance operating temperature [oC]  :27
+	R (resistance)                 [Ohm] : 5000
+	V (resistor voltage)           [V]   : 0.666667
+	I (resistor current)           [A]   : 0.000133333
+	P (resistor power)             [W]   : 8.88889e-05
+
+
+
+**************  Options (Only those different from default)  **************
+
+
+
+*************************  Simulation Statistics  *************************
+
+	Total number of iterations...........: 3
+	Total analysis time (sec)............: 0
+	Time spent in device loading (sec)...: 0
+	Time spent in L-U decomposition (sec): 0
+	Time spent in matrix reordering (sec): 0
+	Time spent in matrix solving (sec)...: 0
+
+***************************  Kernel Messages  *****************************
+
+Circuit: example
+
+

@@ -1,0 +1,78 @@
+
+                 *********************************************
+                 *                                           *
+                 *             A I M - S p i c e             *
+                 *                                           *
+                 *         Professional Version 2018.100           *
+                 *                                           *
+                 *********************************************
+
+	Date: Thu Sep  6 21:42:23 2018
+	Circuit File: C:\Users\Bruker\Documents\Design av IC\Øving 1\oppgave3.cir
+	Analysis: DC Operating Point
+
+**************************  Circuit Description  **************************
+
+     1:  Oving 1
+     2:  
+     3:  D1 1 0 DSUB
+     4:  
+     5:  *include C:\Users\Bruker\Downloads\DBSBdiode.mod
+     6:  * DBSBdiode.mod
+     7:  *
+     8:  * A simple substrate diode model for modeling 
+     9:  * a 100 um x 100 um  drain-bulk diode
+    10:  
+    11:  
+    12:  .MODEL DSUB D LEVEL=1 
+    13:  +IS     =0      ISR     =2.0E-12         IBV = 0
+    14:  +CJO    =9.300e-04 M      =5.00e-01         VJ =8.900e-01 TT     =0.000e+00 
+    15:  +FC     =0.500e+00
+    16:  +EG     =1.110e+00 XTI    =0.000e+00
+    17:  *end of: C:\Users\Bruker\Downloads\DBSBdiode.mod
+    18:  
+    19:  .op
+
+***************************  Model Parameters  ****************************
+
+
+***************  Device Parameters (Only for .op analysis)  ***************
+
+Device d1:
+	Vd   (intrinsic diode voltage) [V] : 13.0549
+	Id   (diode current)           [A] : 2.97544e+98
+	Cdep (depletion capacitance)   [F] : 0.0199498
+	Cdif (diffusion capacitance)   [F] : 0
+	Ce   (equivalent capacitance)  [F] : 0.0199498
+	Gd   (diode conductance)       [S] : 5.76428e+99
+	P    (instantaneous power)     [W] : 3.88441e+99
+
+
+
+**************  Options (Only those different from default)  **************
+
+	Gmin:        1.0E-39
+
+
+*************************  Simulation Statistics  *************************
+
+	Total number of iterations...........: 404
+	Total analysis time (sec)............: 0
+	Time spent in device loading (sec)...: 0
+	Time spent in L-U decomposition (sec): 0
+	Time spent in matrix reordering (sec): 0
+	Time spent in matrix solving (sec)...: 0
+
+***************************  Kernel Messages  *****************************
+
+Circuit: Oving 1
+
+Warning: parameter IS in model dsub cannot be set to 0, increased to 2.22507e-308.
+Warning: Node 1 has less than two connections
+Warning: Gmin step failed
+Warning: Gmin stepping failed
+Warning: source stepping failed
+doAnalyses: Too many iterations without convergence
+
+run simulation aborted
+

@@ -1,0 +1,24 @@
+[aimspice]
+[description]
+319
+Øving 2, Oppgave 4
+
+MN1 d g 0 0 NMOS L=1U W=1U
+vdd d 0 dc 1.8v
+vgs g 0 dc 0.9v
+
+.include C:\Users\Bruker\Documents\6_semester\Design_av_IC\Øving_2\p18_model_card.inc
+.include C:\Users\Bruker\Documents\6_semester\Design_av_IC\Øving_2\p18_cmos_models_tt.inc
+
+.plot dc gm(MN1)
+.plot dc rds(MN1)
+.plot dc id(MN1)
+[dc]
+1
+vdd
+0
+1.8
+0.1
+[ana]
+1 0
+[end]

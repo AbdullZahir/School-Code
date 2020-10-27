@@ -1,0 +1,15 @@
+[aimspice]
+[description]
+62
+AC circuit
+vin 1 0 1 ac
+r1 1 2 10k
+r2 2 0 50k
+c2 2 0 1n 
+
+[ac]
+0
+1000
+0
+200k
+[end]

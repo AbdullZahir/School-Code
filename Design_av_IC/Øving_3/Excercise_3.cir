@@ -1,0 +1,40 @@
+[aimspice]
+[description]
+678
+Oppgave 1c
+
+*vdd1 t1 0 dc 1.8v
+*vdd2 t2 0 dc 1.8v
+*R1 t1 vx 122.4k
+*MN1 vx vx 0 0 NMOS L=1U W=5U
+*MN2 t2 vx 0 0 NMOS L=1U W=5U
+
+
+*.include C:\Users\Bruker\Documents\6_semester\Design_av_IC\Øving_3\p18_cmos_models_ss.inc
+*.include C:\Users\Bruker\Documents\6_semester\Design_av_IC\Øving_3\p18_cmos_models_ff.inc
+.include C:\Users\Bruker\Documents\6_semester\Design_av_IC\Øving_3\p18_cmos_models_tt.inc
+
+.include C:\Users\Bruker\Documents\6_semester\Design_av_IC\Øving_3\p18_model_card.inc
+
+
+.plot dc rds(MN2)
+.param L =0.36U
+.param k=2
+.param W={k*L}
+
+MN3 t3 g 0 0 NMOS L=L W=W
+vdd t3 0 dc 0.9v
+vgsm1 g  0 dc 0.65v
+
+*.plot dc gm(MN3)
+.plot cd rds(MN3)
+
+[dc]
+1
+vgsm1
+0
+1.8
+0.1
+[ana]
+1 0
+[end]

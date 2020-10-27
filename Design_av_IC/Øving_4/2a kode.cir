@@ -1,0 +1,23 @@
+[aimspice]
+[description]
+605
+excercie 4 2b)
+
+*.include C:\Users\Bruker\Documents\6_semester\Design_av_IC\Øving_4\p18_cmos_models_ss.inc
+*.include C:\Users\Bruker\Documents\6_semester\Design_av_IC\Øving_4\p18_cmos_models_ff.inc
+.include C:\Users\Bruker\Documents\6_semester\Design_av_IC\Øving_4\p18_cmos_models_tt.inc
+
+.include C:\Users\Bruker\Documents\6_semester\Design_av_IC\Øving_4\p18_model_card.inc
+
+*MN1 DRAIN GATE SOURCE BULK WIDTH LENGTH
+.param wn={0.9U}
+.param L={0.18U}
+.param wp={k*wn}
+.param k=3.57
+
+VDD vdd 0 dc 1.8v
+VIN Vin 0 dc 0.9v
+
+MP1 t Vin vdd vdd PMOS L=0.18u W=wp
+MN1 t Vin 0 0 NMOS L=0.18u W=wn
+[end]

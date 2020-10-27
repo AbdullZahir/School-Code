@@ -1,0 +1,13 @@
+[aimspice]
+[description]
+76
+Oving 1
+
+D1 1 0 DSUB
+
+.include C:\Users\Bruker\Downloads\DBSBdiode.mod
+
+[options]
+1
+Gmin 1.0E-39
+[end]

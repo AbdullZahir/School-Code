@@ -1,0 +1,106 @@
+[aimspice]
+[description]
+3018
+Analog circuit PROJECT(1 pixel)
+
+.param Wn={2u} 
+.param Wp={10u}
+.param Ln={0.7u}
+.param Lp={2u}
+.param Cs={1.2pf} 
+.param cc1={3pf}
+
+
+.param Ipd_1 = 750p !*200p
+.param EXPOSURETIME = 2m ! Exposure time, range [2 ms, 30 ms]
+.param TRF = {EXPOSURETIME/100} ! Risetime and falltime of EXPOSURE and ERASE signals
+.param PW = {EXPOSURETIME} ! Pulsewidth of EXPOSURE and ERASE signals
+.param PERIOD = {EXPOSURETIME*10} ! Period for testbench sources
+.param FS = 1k; ! Sampling clock frequency 
+.param CLK_PERIOD = {1/FS} ! Sampling clock period
+.param EXPOSE_DLY = {CLK_PERIOD} ! Delay for EXPOSE signal
+.param NRE_R1_DLY = {2*CLK_PERIOD + EXPOSURETIME} ! Delay for NRE_R1 signal
+.param NRE_R2_DLY = {4*CLK_PERIOD + EXPOSURETIME+4m} ! Delay for NRE_R2 signal
+.param ERASE_DLY = {6*CLK_PERIOD + EXPOSURETIME+4m} ! Delay for ERASE signal
+
+VDD vdd 0 dc 1.8v
+VDD1 1 0 dc 1.8v
+
+V_EXPOSE EXPOSE 0 dc 0 pulse(0 1.8 EXPOSE_DLY TRF TRF EXPOSURETIME PERIOD)
+V_ERASE ERASE 0 dc 0 pulse(0 1.8 ERASE_DLY TRF TRF CLK_PERIOD PERIOD)
+V_NRE_R1 NRE_R1 0 dc 0 pulse(1.8 0 NRE_R1_DLY TRF TRF CLK_PERIOD PERIOD)
+V_NRE_R2 NRE_R2 0 dc 0  pulse(1.8 0 NRE_R2_DLY TRF TRF CLK_PERIOD PERIOD)
+
+*V_EXP gEXPOSE 0 dc PULSE(0 1.8 10m TRF TRF PW T)
+*V_ERASE gERASE 0 dc PULSE(1.8 0 0 TRF TRF PW T)
+*V_NRE gNRE 0 dc PULSE(0 1.8 0 TRF TRF 25m 45m)
+
+*.plot V(OUT1) V(OUT2) *! signals going to ADC
+*.plot V(EXPOSE) V(NRE_R1) V(NRE_R2) V(ERASE)
+*.plot V(OUT_SAMPLED1)
+
+
+*-------------------------------------------------------
+*.plot tran(EXPOSE) v(ERASE) v(N2)
+*.plot tran(NRE) v(OUT1) v(N2) V(EXPOSE) V(ERASE) v(NRE_R1) v(NRE_R2) !* plot for 1 pixel circuit
+*.plot tran(NRE) v(OUT1) v(N2) V(EXPOSE) V(ERASE) v(NRE_R1) v(NRE_R2) !* plot for 4 pixel circuit
+X1 EXPOSE ERASE NRE_R1 N1 vdd OUT1 pixel
+X2 EXPOSE ERASE NRE_R1 N2 1 OUT2 pixel
+X3 EXPOSE ERASE NRE_R2 N3 vdd OUT1 pixel
+X4 EXPOSE ERASE NRE_R2 N4 1 OUT2 pixel
+
+XMC1 vdd OUT1 del_3
+XMC2 1 OUT2 del_3
+
+*--------PIXEL--------
+.subckt pixel EXPOSE ERASE NRE N vdd OUT 
+X7 EXPOSE ERASE vdd N del_1
+X8 N NRE vdd OUT del_2 
+.ends
+
+*------------------------------------------------------
+.subckt  del_1 EXPOSE ERASE vdd N2
+X1 vdd N1 PhotoDiode
+MN1 N1 EXPOSE N2 0 NMOS L=Ln W=Wn
+MN2 N2 ERASE 0 0 NMOS L=Ln W=Wn
+CS N2 0 Cs
+.ends 
+
+*------------------------------------------------------
+.subckt del_2 N2 NRE vdd OUT
+MP3 0 N2 N3 vdd PMOS L=Ln W=Wp
+MP4 N3 NRE OUT vdd PMOS L=Ln W=Wp
+.ends
+
+*------------------------------------------------------
+
+.subckt PhotoDiode  VDD N1_R1C1 
+I1_R1C1  VDD   N1_R1C1   DC  Ipd_1
+d1 N1_R1C1 vdd dwell 1
+.model dwell d cj0=1e-14 is=1e-12 m=0.5 bv=40
+Cd1 N1_R1C1 VDD 30f
+.ends 
+
+*------------------------------------------------------
+
+.subckt del_3 vdd OUT
+MP5 OUT OUT vdd vdd PMOS W=Wn L=Lp
+CC1 OUT 0 cc1
+.ends 
+
+
+.include C:\Users\Bruker\Documents\6_semester\Design_av_IC\PROJECT\p18_cmos_models_tt.inc
+.include C:\Users\Bruker\Documents\6_semester\Design_av_IC\PROJECT\p18_model_card.inc
+
+[options]
+1
+Gmin 1.0E-39
+[tran]
+0.1m
+50m
+X
+X
+0
+[ana]
+4 0
+[end]
